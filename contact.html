@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="contact">
+        <div class="container">
+          <h1>Contact Us</h1>
+          <form id="contactForm">
+            <div>
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" />
+            </div>
+            <div>
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" />
+            </div>
+            <div>
+              <label for="message">Message:</label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+            <button type="submit">Send</button>
+          </form>
+          <p id="successMessage" style="display: none">
+            Message sent successfully!
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 20XX Company Name. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const contactForm = document.getElementById("contactForm");
+      const successMessage = document.getElementById("successMessage");
+
+      contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        if (name.trim() === "") {
+          alert("Name field is required.");
+          return;
+        }
+
+        if (email.trim() === "") {
+          alert("Email field is required.");
+          return;
+        }
+
+        if (message.trim() === "") {
+          alert("Message field is required.");
+          return;
+        }
+
+        if (!validateEmail(email)) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        // Ask for confirmation before sending the data
+        const confirmSend = confirm(
+          "Are you sure you want to send this message?"
+        );
+        if (confirmSend) {
+          // Display success message
+          successMessage.style.display = "block";
+          contactForm.reset();
+        }
+      });
+
+      function validateEmail(email) {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+      }
+    </script>
+  </body>
+</html>
